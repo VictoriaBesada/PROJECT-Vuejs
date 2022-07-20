@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <section class="h-100 h-custom" style="background-color: #eee">
       <div class="container py-5 h-100">
