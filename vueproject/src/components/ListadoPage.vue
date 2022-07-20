@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Listado Page</h1>
-    <a @click="$emit('changeFlagFromListado')">Salir</a>
+    <a @click="desloguear">Salir</a>
   </div>
 </template>
 
@@ -11,10 +11,14 @@ export default {
   props: [],
   data (){
     return{
-      carro: [],
-      listado: []
+
     }
-  }
+  },
+  methods: {
+    desloguear() {
+      this.$emit("changeFlagFromListado");
+    }
+    },
 };
 </script>
 
