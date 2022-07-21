@@ -32,7 +32,11 @@
                   <span>Total</span
                   ><span>{{ item.precio * item.cantidad }}</span>
                 </div>
-                <button class="btn btn-primary btn-sm" type="button">
+                <button
+                  class="btn btn-primary btn-sm"
+                  type="button"
+                  @click="verDetalle(item)"
+                >
                   Detalles
                 </button>
                 <button
@@ -62,10 +66,13 @@ export default {
     desloguear() {
       this.$emit("changeFlagFromListado");
     },
-    agregarAlCarrito(payload){
-      let objetoCarrito = {...payload, cantidadCarrito: 1}
+    agregarAlCarrito(payload) {
+      let objetoCarrito = { ...payload, cantidadCarrito: 1 };
       this.$emit("changeFlagFromListado", objetoCarrito);
-    }
+    },
+    verDetalleProducto(payload) {
+      this.$emit("verDetalleProducto", payload);
+    },
   },
 };
 </script>

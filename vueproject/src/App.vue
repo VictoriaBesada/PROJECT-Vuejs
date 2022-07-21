@@ -14,9 +14,16 @@
       v-if="canAccess"
       @changeFlagFromListado="recibiElMensaje"
       :productos="listadoDeProductos"
+      @verDetalleProducto="recibirDetalleProducto"
     />
-    <CarritoPage :carro ="carrito"/>
-    <InfoPage />
+    <CarritoPage
+      :carro="carrito"
+      @actualizarCarrito="recibirCarritoActualizado"
+    />
+    <InfoPage 
+    v-if="productoSeleccionado" 
+    :producto="productoSeleccionado" 
+    />
   </div>
 </template>
 
@@ -129,6 +136,7 @@ export default {
         },
       ],
       carrito: [],
+      productoSeleccionado: null,
     };
   },
   methods: {
@@ -140,6 +148,12 @@ export default {
     },
     recibirProductosCarrito(payload) {
       this.carrito.push(payload);
+    },
+    recibirCarritoActualizado(payload) {
+      this.carrito = [...payload];
+    },
+    recibirDetalleProducto(payload) {
+      this.productoSeleccionado = payload;
     },
   },
 };

@@ -16,7 +16,7 @@
                       name="name"
                       class="form-control-plaintext"
                       id="usuario"
-                      v-model="usuario"
+                      v-model="nombre"
                     />
                   </div>
                 </div>
@@ -52,13 +52,13 @@ export default {
   },
   data() {
     return {
-      usuario: "",
+      nombre: "",
       password: "",
     };
   },
   methods: {
     cambiarValor() {
-      let usuarioExistente = (this.usuarios.filter(o=> o.usuario) == this.usuario && o.password == this.password)
+      let usuarioExistente = this.usuarios.filter(o=> o.usuario) == this.nombre && o.password == this.password
       if (usuarioExistente) {
         this.$emit("changeFlag");
       }

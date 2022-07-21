@@ -20,110 +20,17 @@
                       class="d-flex justify-content-between align-items-center mb-4"
                     >
                       <div>
-                        <p class="mb-1">Shopping cart</p>
-                        <p class="mb-0">You have 4 items in your cart</p>
-                      </div>
-                    </div>
-
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex flex-row align-items-center">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                class="img-fluid rounded-3"
-                                alt="Shopping item"
-                                style="width: 65px"
-                              />
-                            </div>
-                            <div class="ms-3">
-                              <h5>Iphone 11 pro</h5>
-                              <p class="small mb-0">256GB, Navy Blue</p>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row align-items-center">
-                            <div style="width: 50px">
-                              <h5 class="fw-normal mb-0">2</h5>
-                            </div>
-                            <div style="width: 80px">
-                              <h5 class="mb-0">$900</h5>
-                            </div>
-                            <a href="#!" style="color: #cecece"
-                              ><i class="fas fa-trash-alt"></i
-                            ></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex flex-row align-items-center">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img2.webp"
-                                class="img-fluid rounded-3"
-                                alt="Shopping item"
-                                style="width: 65px"
-                              />
-                            </div>
-                            <div class="ms-3">
-                              <h5>Samsung galaxy Note 10</h5>
-                              <p class="small mb-0">256GB, Navy Blue</p>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row align-items-center">
-                            <div style="width: 50px">
-                              <h5 class="fw-normal mb-0">2</h5>
-                            </div>
-                            <div style="width: 80px">
-                              <h5 class="mb-0">$900</h5>
-                            </div>
-                            <a href="#!" style="color: #cecece"
-                              ><i class="fas fa-trash-alt"></i
-                            ></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="card mb-3">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex flex-row align-items-center">
-                            <div>
-                              <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img3.webp"
-                                class="img-fluid rounded-3"
-                                alt="Shopping item"
-                                style="width: 65px"
-                              />
-                            </div>
-                            <div class="ms-3">
-                              <h5>Canon EOS M50</h5>
-                              <p class="small mb-0">Onyx Black</p>
-                            </div>
-                          </div>
-                          <div class="d-flex flex-row align-items-center">
-                            <div style="width: 50px">
-                              <h5 class="fw-normal mb-0">1</h5>
-                            </div>
-                            <div style="width: 80px">
-                              <h5 class="mb-0">$1199</h5>
-                            </div>
-                            <a href="#!" style="color: #cecece"
-                              ><i class="fas fa-trash-alt"></i
-                            ></a>
-                          </div>
-                        </div>
+                        <p class="mb-1">Tu carrito</p>
                       </div>
                     </div>
 
                     <div class="card mb-3 mb-lg-0">
                       <div class="card-body">
-                        <div class="d-flex justify-content-between">
+                        <div
+                          class="d-flex justify-content-between"
+                          v-for="item in carroLocal"
+                          :key="item.id"
+                        >
                           <div class="d-flex flex-row align-items-center">
                             <div>
                               <img
@@ -134,16 +41,39 @@
                               />
                             </div>
                             <div class="ms-3">
-                              <h5>MacBook Pro</h5>
-                              <p class="small mb-0">1TB, Graphite</p>
+                              <h5>{{ item.titulo }}</h5>
+                              <p class="small mb-0">{{ item.descripcion }}</p>
                             </div>
                           </div>
                           <div class="d-flex flex-row align-items-center">
                             <div style="width: 50px">
-                              <h5 class="fw-normal mb-0">1</h5>
+                              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                <button
+                                  class="btn btn-link px-2"
+                                  @click="restar(item)"
+                                >
+                                  <i class="fas fa-minus"></i>
+                                </button>
+
+                                <input
+                                  id="form1"
+                                  min="0"
+                                  name="quantity"
+                                  value="1"
+                                  type="number"
+                                  class="form-control form-control-sm"
+                                />
+
+                                <button
+                                  class="btn btn-link px-2"
+                                  @click="sumar(item)"
+                                >
+                                  <i class="fas fa-plus"></i>
+                                </button>
+                              </div>
                             </div>
                             <div style="width: 80px">
-                              <h5 class="mb-0">$1799</h5>
+                              <h5 class="mb-0">{{ item.precio }}</h5>
                             </div>
                             <a href="#!" style="color: #cecece"
                               ><i class="fas fa-trash-alt"></i
@@ -294,13 +224,29 @@ export default {
   name: "CarritoPage",
   props: ["carro"],
   data() {
-    return {};
+    return {
+      carroLocal: [],
+    };
+  },
+  mounted() {
+    this.carroLocal = this.carro;
   },
   methods: {
     remover(id) {
       this.$emit("remover", id);
     },
+    sumar(payload){
+      payload.cantidadCarrito++
+    },
+    restar(payload){
+      payload.cantidadCarrito--
+    },
   },
+  watch:{
+    carroLocal(newObject ){
+      this.$emit("actualizarCarrito", newObject)
+    }
+  }
 };
 </script>
 

@@ -23,7 +23,7 @@
                             v-model="usuario.nombre"
                           />
                           <label class="form-label" for="form3Example1c"
-                            >Name</label
+                            >Nombre</label
                           >
                         </div>
                       </div>
@@ -38,7 +38,7 @@
                             v-model="usuario.apellido"
                           />
                           <label class="form-label" for="form3Example3c"
-                            >Surname</label
+                            >Apellido</label
                           >
                         </div>
                       </div>
@@ -50,10 +50,10 @@
                             type="text"
                             id="form3Example4c"
                             class="form-control"
-                            v-model="usuario.email"
+                            v-model="usuario.usuario"
                           />
                           <label class="form-label" for="form3Example4c"
-                            >Email</label
+                            >Usuario</label
                           >
                         </div>
                       </div>
@@ -68,7 +68,7 @@
                             v-model="usuario.password"
                           />
                           <label class="form-label" for="form3Example4cd"
-                            >Password</label
+                            >Contrasena</label
                           >
                         </div>
                       </div>
@@ -125,7 +125,7 @@ export default {
       usuario: {
         nombre: "",
         apellido: "",
-        email: "",
+        usuario: "",
         password: "",
       },
     };
