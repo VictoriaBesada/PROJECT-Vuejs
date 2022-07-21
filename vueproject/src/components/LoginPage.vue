@@ -1,4 +1,4 @@
- <template>
+<template>
   <div>
     <section class="h-100 h-custom" style="background-color: #eee">
       <div class="container py-5 h-100">
@@ -34,7 +34,13 @@
                     />
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-lg" @click="cambiarValor">Entrar</button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  @click="cambiarValor"
+                >
+                  Entrar
+                </button>
               </div>
             </div>
           </div>
@@ -48,7 +54,7 @@
 export default {
   name: "LoginPage",
   props: {
-    usuarios: Array
+    usuarios: Array,
   },
   data() {
     return {
@@ -57,9 +63,14 @@ export default {
     };
   },
   methods: {
+    // cambiarValor() {
+    //   let usuarioExistente = this.usuarios.filter(o=> o.usuario) == this.nombre && o.password == this.password
+    //   if (usuarioExistente) {
+    //     this.$emit("changeFlag");
+    //   }
+    // },
     cambiarValor() {
-      let usuarioExistente = this.usuarios.filter(o=> o.usuario) == this.nombre && o.password == this.password
-      if (usuarioExistente) {
+      if (this.nombre == "admin" && this.password == "123") {
         this.$emit("changeFlag");
       }
     },

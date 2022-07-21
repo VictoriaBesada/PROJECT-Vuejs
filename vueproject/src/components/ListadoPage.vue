@@ -1,18 +1,18 @@
 <template>
   <div>
-    <a @click="desloguear">Salir</a>
+    <a @click="desloguear"><strong>Salir</strong></a>
     <section style="background-color: #eee">
-      <div class="container py-5">
-        <div class="row justify-content-center">
-          <div class="col-md-8 col-lg-6 col-xl-4">
+      <div class="container">
+        <div class="row">
+          <div class="">
             <div
-              class="card text-black"
+              class="card"
+              style="display: inline-block"
               v-for="item in productos"
               :key="item.id"
             >
-              <i class="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
               <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/3.webp"
+                v-bind:src="item.imagen"
                 class="card-img-top"
                 alt="Apple Computer"
               />
@@ -22,30 +22,30 @@
                   <p class="text-muted mb-4">{{ item.descripcion }}</p>
                 </div>
                 <div>
-                  <div class="d-flex justify-content-between">
+                  <div
+                    class="d-flex justify-content-between total font-weight-bold mt-4"
+                  >
                     <span>Precio unitario</span><span>{{ item.precio }}</span>
                   </div>
                 </div>
-                <div
-                  class="d-flex justify-content-between total font-weight-bold mt-4"
-                >
-                  <span>Total</span
-                  ><span>{{ item.precio * item.cantidad }}</span>
+                <div style="text-align: center">
+                  <button
+                  style="margin: 10px"
+                    class="btn btn-primary btn-sm"
+                    type="button"
+                    @click="verDetalle(item)"
+                  >
+                    Detalles
+                  </button>
+                  <button
+                  style="margin: 10px"
+                    class="btn btn-outline-primary btn-sm mt-2"
+                    type="button"
+                    @click="agregarAlCarrito(item)"
+                  >
+                    Agregar al carrito
+                  </button>
                 </div>
-                <button
-                  class="btn btn-primary btn-sm"
-                  type="button"
-                  @click="verDetalle(item)"
-                >
-                  Detalles
-                </button>
-                <button
-                  class="btn btn-outline-primary btn-sm mt-2"
-                  type="button"
-                  @click="agregarAlCarrito(item)"
-                >
-                  Agregar al carrito
-                </button>
               </div>
             </div>
           </div>
@@ -80,5 +80,6 @@ export default {
 <style scoped>
 .card {
   border-radius: 25px;
+  margin: 5px;
 }
 </style>

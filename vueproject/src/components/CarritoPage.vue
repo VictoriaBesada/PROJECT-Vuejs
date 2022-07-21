@@ -89,7 +89,7 @@
                         <div
                           class="d-flex justify-content-between align-items-center mb-4"
                         >
-                          <h5 class="mb-0">Card details</h5>
+                          <h5 class="mb-0">Metodo de pago</h5>
                           <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
                             class="img-fluid rounded-3"
@@ -98,20 +98,6 @@
                           />
                         </div>
 
-                        <p class="small mb-2">Card type</p>
-                        <a href="#!" type="submit" class="text-white"
-                          ><i class="fab fa-cc-mastercard fa-2x me-2"></i
-                        ></a>
-                        <a href="#!" type="submit" class="text-white"
-                          ><i class="fab fa-cc-visa fa-2x me-2"></i
-                        ></a>
-                        <a href="#!" type="submit" class="text-white"
-                          ><i class="fab fa-cc-amex fa-2x me-2"></i
-                        ></a>
-                        <a href="#!" type="submit" class="text-white"
-                          ><i class="fab fa-cc-paypal fa-2x"></i
-                        ></a>
-
                         <form class="mt-4">
                           <div class="form-outline form-white mb-4">
                             <input
@@ -119,10 +105,10 @@
                               id="typeName"
                               class="form-control form-control-lg"
                               siez="17"
-                              placeholder="Cardholder's Name"
+                              placeholder="Nombre del titular de la tarjeta"
                             />
                             <label class="form-label" for="typeName"
-                              >Cardholder's Name</label
+                              >Nombre del titular de la tarjeta</label
                             >
                           </div>
 
@@ -137,7 +123,7 @@
                               maxlength="19"
                             />
                             <label class="form-label" for="typeText"
-                              >Card Number</label
+                              >Numero de tarjeta</label
                             >
                           </div>
 
@@ -154,7 +140,7 @@
                                   maxlength="7"
                                 />
                                 <label class="form-label" for="typeExp"
-                                  >Expiration</label
+                                  >Vencimiento</label
                                 >
                               </div>
                             </div>
@@ -170,7 +156,7 @@
                                   maxlength="3"
                                 />
                                 <label class="form-label" for="typeText"
-                                  >Cvv</label
+                                  >CVV</label
                                 >
                               </div>
                             </div>
@@ -185,12 +171,12 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                          <p class="mb-2">Shipping</p>
+                          <p class="mb-2">Envio</p>
                           <p class="mb-2">$20.00</p>
                         </div>
 
                         <div class="d-flex justify-content-between mb-4">
-                          <p class="mb-2">Total(Incl. taxes)</p>
+                          <p class="mb-2">Total</p>
                           <p class="mb-2">$4818.00</p>
                         </div>
 
@@ -235,18 +221,18 @@ export default {
     remover(id) {
       this.$emit("remover", id);
     },
-    sumar(payload){
-      payload.cantidadCarrito++
+    sumar(payload) {
+      payload.cantidadCarrito++;
     },
-    restar(payload){
-      payload.cantidadCarrito--
+    restar(payload) {
+      payload.cantidadCarrito--;
     },
   },
-  watch:{
-    carroLocal(newObject ){
-      this.$emit("actualizarCarrito", newObject)
-    }
-  }
+  watch: {
+    carroLocal(newObject) {
+      this.$emit("actualizarCarrito", newObject);
+    },
+  },
 };
 </script>
 

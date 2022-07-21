@@ -17,13 +17,11 @@
       @verDetalleProducto="recibirDetalleProducto"
     />
     <CarritoPage
+      v-if="canAccess"
       :carro="carrito"
       @actualizarCarrito="recibirCarritoActualizado"
     />
-    <InfoPage 
-    v-if="productoSeleccionado" 
-    :producto="productoSeleccionado" 
-    />
+    <InfoPage v-if="productoSeleccionado" :producto="productoSeleccionado" />
   </div>
 </template>
 
@@ -45,7 +43,7 @@ export default {
   },
   data() {
     return {
-      canAccess: true,
+      canAccess: false,
       listadoDeUsuarios: [],
       listadoDeProductos: [
         {
@@ -54,7 +52,7 @@ export default {
             "https://robohash.org/dolorvoluptateofficiis.png?size=50x50&set=set1",
           titulo: "Spice - Greek 1 Step",
           descripcion: "Clothing",
-          precio: "$0.00",
+          precio: "$34.50",
           cantidad: 85,
         },
         {
@@ -62,7 +60,7 @@ export default {
           imagen: "https://robohash.org/modietminus.png?size=50x50&set=set1",
           titulo: "Ham Black Forest",
           descripcion: "Games",
-          precio: "$0.00",
+          precio: "$340.20",
           cantidad: 3,
         },
         {
@@ -71,7 +69,7 @@ export default {
             "https://robohash.org/vitaenihilrepudiandae.png?size=50x50&set=set1",
           titulo: "Pepper - Green, Chili",
           descripcion: "Shoes",
-          precio: "$0.00",
+          precio: "$102.55",
           cantidad: 84,
         },
         {
@@ -79,7 +77,7 @@ export default {
           imagen: "https://robohash.org/etatamet.png?size=50x50&set=set1",
           titulo: "Juice - Clam, 46 Oz",
           descripcion: "Health",
-          precio: "$0.00",
+          precio: "$588.00",
           cantidad: 22,
         },
         {
@@ -88,7 +86,7 @@ export default {
             "https://robohash.org/voluptatemconsequaturaut.png?size=50x50&set=set1",
           titulo: "Bread - Wheat Baguette",
           descripcion: "Baby",
-          precio: "$0.00",
+          precio: "$903.33",
           cantidad: 15,
         },
         {
@@ -97,7 +95,7 @@ export default {
             "https://robohash.org/autdolorumconsequatur.png?size=50x50&set=set1",
           titulo: "Crush - Orange, 355ml",
           descripcion: "Kids",
-          precio: "$0.00",
+          precio: "$200.90",
           cantidad: 28,
         },
         {
@@ -106,7 +104,7 @@ export default {
             "https://robohash.org/estbeataelibero.png?size=50x50&set=set1",
           titulo: "Wine - Red, Mouton Cadet",
           descripcion: "Garden",
-          precio: "$0.00",
+          precio: "$786.40",
           cantidad: 81,
         },
         {
@@ -115,7 +113,7 @@ export default {
             "https://robohash.org/evenietcumquereprehenderit.png?size=50x50&set=set1",
           titulo: "Otomegusa Dashi Konbu",
           descripcion: "Movies",
-          precio: "$0.00",
+          precio: "$100.20",
           cantidad: 54,
         },
         {
@@ -123,7 +121,7 @@ export default {
           imagen: "https://robohash.org/omnisquasoptio.png?size=50x50&set=set1",
           titulo: "Apples - Sliced / Wedge",
           descripcion: "Books",
-          precio: "$0.00",
+          precio: "$344.00",
           cantidad: 37,
         },
         {
@@ -131,7 +129,7 @@ export default {
           imagen: "https://robohash.org/situtminus.png?size=50x50&set=set1",
           titulo: "Tomatoes - Grape",
           descripcion: "Games",
-          precio: "$0.00",
+          precio: "$1000.00",
           cantidad: 29,
         },
       ],
