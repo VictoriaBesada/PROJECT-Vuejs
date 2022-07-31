@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="vh-100" style="background-color: #eee">
+    <section class="vh-50" style="background-color: #eee">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -15,6 +15,7 @@
                     <vue-form
                       :state="formstate"
                       @submit.prevent="onSubmit"
+                      autocomplete="off"
                       class="mx-1 mx-md-4"
                     >
                       <validate auto-label>
@@ -26,6 +27,8 @@
                             <input
                               required
                               name="name"
+                              minlength="5"
+                              maxlength="12"
                               class="form-control"
                               v-model.lazy="usuario.name"
                             />
@@ -36,6 +39,9 @@
                             >
                               <div slot="required">
                                 Nombre es un campo requerido
+                              </div>
+                              <div slot="minlength">
+                                Nombre debe tener entre 5 y 12 caracteres
                               </div>
                             </field-messages>
                           </div>
@@ -93,6 +99,8 @@
                               name="edad"
                               type="number"
                               class="form-control"
+                              min="21"
+                              max="100"
                               v-model.number="usuario.edad"
                             />
                             <field-messages
@@ -103,8 +111,11 @@
                               <div slot="required">
                                 Edad es un campo requerido
                               </div>
-                              <div slot="edad">
+                              <div slot="min">
                                 La edad minima es de 21 anios
+                              </div>
+                              <div slot="max">
+                                La edad maxima es de 100 anios
                               </div>
                             </field-messages>
                           </div>
@@ -159,6 +170,7 @@
                               <div slot="required">
                                 Password es un campo requerido
                               </div>
+                              <div slot="password">Password no es válida</div>
                             </field-messages>
                           </div>
                         </div>
@@ -206,7 +218,9 @@
         </div>
       </div>
     </section>
-    <section style="background-color: #eee">
+    <div style="background-color: #eee"><br /><br /></div>
+
+    <section class="vh-50" style="background-color: #eee">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -222,6 +236,7 @@
                         <th>Email</th>
                         <th>Contrasenia</th>
                         <th>Eliminar datos</th>
+                        <th>Agregar datos</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -264,6 +279,15 @@
                             Limpiar
                           </button>
                         </td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-link btn-sm btn-rounded"
+                            v-on:click="agregar"
+                          >
+                            Agregar
+                          </button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -284,7 +308,7 @@ export default {
   data() {
     return {
       formstate: {
-        $error: {},
+        // $error: {},
         $submittedState: {},
       },
       usuario: {
@@ -302,17 +326,19 @@ export default {
     },
     onSubmit: function () {
       if (this.formstate.$invalid) {
-        alert(this.formstate.$error);
+        alert("Hay errores en el formulario");
         return;
       }
+      console.log("Form submitted!", this.formstate);
     },
-    limpiar (){
-        (this.usuario.name = '',
-        this.usuario.pais = '',
-        this.usuario.edad = '',
-        this.usuario.email = '',
-        this.usuario.password = '')
+    limpiar() {
+      (this.usuario.name = ""),
+        (this.usuario.pais = ""),
+        (this.usuario.edad = ""),
+        (this.usuario.email = ""),
+        (this.usuario.password = "");
     },
+    agregar() {},
   },
 };
 </script>

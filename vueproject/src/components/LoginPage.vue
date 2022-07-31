@@ -14,7 +14,7 @@
                     <input
                       type="text"
                       name="name"
-                      class="form-control-plaintext"
+                      class="form-control"
                       id="usuario"
                       v-model="nombre"
                     />
