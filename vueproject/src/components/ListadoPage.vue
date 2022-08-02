@@ -4,14 +4,14 @@
     <section style="background-color: #eee">
       <div class="container">
         <div class="container" style="display: flex">
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Ver lista cursos</label>
             <br />
             <button class="btn btn-primary btn-sm" @click="traerDatos">
               Ver
             </button>
           </div>
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Agregar un nuevo curso</label>
             <input
               type="text"
@@ -25,7 +25,7 @@
             </button>
           </div>
 
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Cambiar titulo</label>
             <input
               type="text"
@@ -38,7 +38,7 @@
               Actualizar titulo
             </button>
           </div>
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Cambiar descripcion</label>
             <input
               type="text"
@@ -54,7 +54,7 @@
               Actualizar descripcion
             </button>
           </div>
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Cambiar precio</label>
             <input
               type="text"
@@ -68,7 +68,7 @@
             </button>
           </div>
 
-          <div class="form-group" style="margin:10px">
+          <div class="form-group" style="margin: 10px">
             <label>Eliminar un curso</label>
             <br />
             <button class="btn btn-primary btn-sm" @click="borrarDatos">
@@ -183,6 +183,7 @@ export default {
           body: JSON.stringify(nuevoCurso),
         };
         await fetch(`${this.rutaBase}/cursos`, options);
+        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }
@@ -201,6 +202,7 @@ export default {
           body: JSON.stringify(actualizarPrecio),
         };
         await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }
@@ -219,6 +221,7 @@ export default {
           body: JSON.stringify(cambiarNombre),
         };
         await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }
@@ -237,6 +240,7 @@ export default {
           body: JSON.stringify(cambiarDescripcion),
         };
         await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }
@@ -251,6 +255,7 @@ export default {
           },
         };
         await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }
