@@ -115,14 +115,13 @@
                           <div class="form-outline form-white mb-4">
                             <input
                               type="text"
-                              id="typeText"
                               class="form-control form-control-lg"
                               siez="17"
                               placeholder="1234 5678 9012 3457"
                               minlength="19"
                               maxlength="19"
                             />
-                            <label class="form-label" for="typeText"
+                            <label class="form-label" 
                               >Numero de tarjeta</label
                             >
                           </div>
