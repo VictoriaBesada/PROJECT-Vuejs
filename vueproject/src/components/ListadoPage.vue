@@ -3,51 +3,73 @@
     <a @click="desloguear"><strong>Salir</strong></a>
     <section style="background-color: #eee">
       <div class="container">
+        <div class="form-group">
+          <label>Ver lista cursos</label>
+          <br>
+          <button class="btn btn-primary btn-sm" @click="traerDatos">
+            Ver
+          </button>
+        </div>
+        <div class="form-group">
+          <label>Agregar un nuevo curso</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Nombre del curso"
+            v-model="nuevo"
+          />
+          <button class="btn btn-primary btn-sm" @click="agregarDatos">
+            Agregar nuevo curso
+          </button>
+        </div>
         <div class="row">
-          <div class="">
+          <div>
+          <div >
             <div
-              class="card"
+              class="card col-xl-3 col-lg-4 "
               style="display: inline-block"
-              v-for="item in productos"
-              :key="item.id"
+              v-for="curso in cursos"
+              :key="curso.id"
             >
               <img
-                v-bind:src="item.imagen"
+                v-bind:src="curso.imagen"
                 class="card-img-top"
                 alt="Apple Computer"
               />
               <div class="card-body">
                 <div class="text-center">
-                  <h5 class="card-title">{{ item.titulo }}</h5>
-                  <p class="text-muted mb-4">{{ item.descripcion }}</p>
+                  <h5 class="card-title">{{ curso.nombre }}</h5>
+                  <p class="text-muted mb-4">{{ curso.descripcion }}</p>
                 </div>
                 <div>
                   <div
                     class="d-flex justify-content-between total font-weight-bold mt-4"
                   >
-                    <span>Precio unitario</span><span>{{ item.precio }}</span>
+                    <span>Precio unitario</span><span>{{ curso.precio }}</span>
                   </div>
                 </div>
                 <div style="text-align: center">
                   <button
-                  style="margin: 10px"
+                    style="margin: 10px"
                     class="btn btn-primary btn-sm"
                     type="button"
-                    @click="verDetalle(item)"
+                    @click="verDetalle(curso.descripcion)"
                   >
                     Detalles
                   </button>
                   <button
-                  style="margin: 10px"
+                    style="margin: 10px"
                     class="btn btn-outline-primary btn-sm mt-2"
                     type="button"
-                    @click="agregarAlCarrito(item)"
+                    @click="agregarAlCarrito(curso.id)"
                   >
                     Agregar al carrito
                   </button>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -58,13 +80,46 @@
 <script>
 export default {
   name: "ListadoPage",
-  props: ["productos"],
+  props: {
+    msg: String,
+  },
   data() {
-    return {};
+    return {
+      rutaBase: "https://626765be78638336421ee4dd.mockapi.io",
+      cursos: [],
+      nuevo: "",
+    };
   },
   methods: {
     desloguear() {
       this.$emit("changeFlagFromListado");
+    },
+    async traerDatos() {
+      try {
+        let rawData = await fetch(`${this.rutaBase}/cursos`);
+        let jsonData = await rawData.json();
+        this.cursos = jsonData;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async agregarDatos() {
+      try {
+        const nuevoCurso = {
+          nombre: this.nuevo,
+        };
+        const options = {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(nuevoCurso),
+        };
+        await fetch(`${this.rutaBase}/cursos`, options);
+      } catch (error) {
+        console.error(error);
+      }
     },
     agregarAlCarrito(payload) {
       let objetoCarrito = { ...payload, cantidadCarrito: 1 };

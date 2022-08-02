@@ -11,6 +11,7 @@
       @agregarAlCarrito="recibirProductosCarrito"
     />
     <ListadoPage
+      msg="Fetch"
       v-if="canAccess"
       @changeFlagFromListado="recibiElMensaje"
       :productos="listadoDeProductos"
@@ -43,7 +44,7 @@ export default {
   },
   data() {
     return {
-      canAccess: false,
+      canAccess: true,
       listadoDeUsuarios: [],
       listadoDeProductos: [
         {
