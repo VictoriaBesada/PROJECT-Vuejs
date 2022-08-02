@@ -3,71 +3,78 @@
     <a @click="desloguear"><strong>Salir</strong></a>
     <section style="background-color: #eee">
       <div class="container">
-        <div class="form-group">
-          <label>Ver lista cursos</label>
-          <br />
-          <button class="btn btn-primary btn-sm" @click="traerDatos">
-            Ver
-          </button>
-        </div>
-        <div class="form-group">
-          <label>Agregar un nuevo curso</label>
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Nombre del curso"
-            v-model="nuevo"
-          />
-          <button class="btn btn-primary btn-sm" @click="agregarDatos">
-            Agregar nuevo curso
-          </button>
-        </div>
-        <div class="form-group">
-          <label>Cambiar titulo</label>
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Insertar nuevo titulo"
-            v-model="nombre"
-          />
-          <button class="btn btn-primary btn-sm" @click="actualizarNombre">
-            Actualizar titulo
-          </button>
-        </div>
-        <div class="form-group">
-          <label>Cambiar descripcion</label>
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Insertar nueva descripcion"
-            v-model="descripcion"
-          />
-          <button class="btn btn-primary btn-sm" @click="actualizarDescripcion">
-            Actualizar descripcion
-          </button>
-        </div>
-        <div class="form-group">
-          <label>Cambiar precio</label>
-          <input
-            type="text"
-            class="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Insertar nuevo precio"
-            v-model="precio"
-          />
-          <button class="btn btn-primary btn-sm" @click="actualizarPrecio">
-            Actualizar precio
-          </button>
-        </div>
-        <div class="form-group">
-          <label>Eliminar un curso</label>
-          <br />
-          <button class="btn btn-primary btn-sm" @click="borrarDatos">
-            Eliminar curso
-          </button>
+        <div class="container" style="display: flex">
+          <div class="form-group" style="margin:10px">
+            <label>Ver lista cursos</label>
+            <br />
+            <button class="btn btn-primary btn-sm" @click="traerDatos">
+              Ver
+            </button>
+          </div>
+          <div class="form-group" style="margin:10px">
+            <label>Agregar un nuevo curso</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Nombre del curso"
+              v-model="nuevo"
+            />
+            <button class="btn btn-primary btn-sm" @click="agregarDatos">
+              Agregar nuevo curso
+            </button>
+          </div>
+
+          <div class="form-group" style="margin:10px">
+            <label>Cambiar titulo</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Insertar nuevo titulo"
+              v-model="nombre"
+            />
+            <button class="btn btn-primary btn-sm" @click="actualizarNombre">
+              Actualizar titulo
+            </button>
+          </div>
+          <div class="form-group" style="margin:10px">
+            <label>Cambiar descripcion</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Insertar nueva descripcion"
+              v-model="descripcion"
+            />
+            <button
+              class="btn btn-primary btn-sm"
+              @click="actualizarDescripcion"
+            >
+              Actualizar descripcion
+            </button>
+          </div>
+          <div class="form-group" style="margin:10px">
+            <label>Cambiar precio</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-describedby="emailHelp"
+              placeholder="Insertar nuevo precio"
+              v-model="precio"
+            />
+            <button class="btn btn-primary btn-sm" @click="actualizarPrecio">
+              Actualizar precio
+            </button>
+          </div>
+
+          <div class="form-group" style="margin:10px">
+            <label>Eliminar un curso</label>
+            <br />
+            <button class="btn btn-primary btn-sm" @click="borrarDatos">
+              Eliminar curso
+            </button>
+          </div>
         </div>
         <div class="row">
           <div>
