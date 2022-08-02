@@ -24,6 +24,32 @@
           </button>
         </div>
         <div class="form-group">
+          <label>Cambiar titulo</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Insertar nuevo titulo"
+            v-model="nombre"
+          />
+          <button class="btn btn-primary btn-sm" @click="actualizarNombre">
+            Actualizar titulo
+          </button>
+        </div>
+        <div class="form-group">
+          <label>Cambiar descripcion</label>
+          <input
+            type="text"
+            class="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Insertar nueva descripcion"
+            v-model="descripcion"
+          />
+          <button class="btn btn-primary btn-sm" @click="actualizarDescripcion">
+            Actualizar descripcion
+          </button>
+        </div>
+        <div class="form-group">
           <label>Cambiar precio</label>
           <input
             type="text"
@@ -32,13 +58,13 @@
             placeholder="Insertar nuevo precio"
             v-model="precio"
           />
-          <button class="btn btn-primary btn-sm" @click="actualizarDatos">
+          <button class="btn btn-primary btn-sm" @click="actualizarPrecio">
             Actualizar precio
           </button>
         </div>
         <div class="form-group">
           <label>Eliminar un curso</label>
-          <br>
+          <br />
           <button class="btn btn-primary btn-sm" @click="borrarDatos">
             Eliminar curso
           </button>
@@ -115,6 +141,8 @@ export default {
       cursos: [],
       nuevo: "",
       precio: "",
+      nombre: "",
+      descripcion: "",
       selected: 0,
     };
   },
@@ -152,7 +180,7 @@ export default {
         console.error(error);
       }
     },
-    async actualizarDatos() {
+    async actualizarPrecio() {
       try {
         const actualizarPrecio = {
           precio: this.precio,
@@ -164,6 +192,42 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(actualizarPrecio),
+        };
+        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async actualizarNombre() {
+      try {
+        const cambiarNombre = {
+          nombre: this.nombre,
+        };
+        const options = {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cambiarNombre),
+        };
+        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async actualizarDescripcion() {
+      try {
+        const cambiarDescripcion = {
+          descripcion: this.descripcion,
+        };
+        const options = {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cambiarDescripcion),
         };
         await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
       } catch (error) {
