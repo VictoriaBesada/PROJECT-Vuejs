@@ -76,6 +76,7 @@
             </button>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div>
             <div>
@@ -137,6 +138,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "ListadoPage",
   props: {
@@ -162,9 +164,9 @@ export default {
     },
     async traerDatos() {
       try {
-        let rawData = await fetch(`${this.rutaBase}/cursos`);
-        let jsonData = await rawData.json();
-        this.cursos = jsonData.sort((a, b) => b.id - a.id);
+        let rawData = await axios.get(`${this.rutaBase}/cursos`);
+        let data = await rawData.data;
+        this.cursos = data.sort((a, b) => b.id - a.id);
       } catch (error) {
         console.error(error);
       }
@@ -174,15 +176,7 @@ export default {
         const nuevoCurso = {
           nombre: this.nuevo,
         };
-        const options = {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(nuevoCurso),
-        };
-        await fetch(`${this.rutaBase}/cursos`, options);
+        await axios.post(`${this.rutaBase}/cursos`, nuevoCurso);
         await this.traerDatos();
       } catch (error) {
         console.error(error);
@@ -193,15 +187,7 @@ export default {
         const actualizarPrecio = {
           precio: this.precio,
         };
-        const options = {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(actualizarPrecio),
-        };
-        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, actualizarPrecio);
         await this.traerDatos();
       } catch (error) {
         console.error(error);
@@ -212,15 +198,7 @@ export default {
         const cambiarNombre = {
           nombre: this.nombre,
         };
-        const options = {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cambiarNombre),
-        };
-        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, cambiarNombre);
         await this.traerDatos();
       } catch (error) {
         console.error(error);
@@ -231,15 +209,7 @@ export default {
         const cambiarDescripcion = {
           descripcion: this.descripcion,
         };
-        const options = {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cambiarDescripcion),
-        };
-        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, cambiarDescripcion);
         await this.traerDatos();
       } catch (error) {
         console.error(error);
@@ -247,14 +217,7 @@ export default {
     },
     async borrarDatos() {
       try {
-        const options = {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        };
-        await fetch(`${this.rutaBase}/cursos/${this.selected}`, options);
+        await axios.delete(`${this.rutaBase}/cursos/${this.selected}`);
         await this.traerDatos();
       } catch (error) {
         console.error(error);
