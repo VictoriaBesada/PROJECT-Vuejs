@@ -72,13 +72,12 @@
                       </div>
                     </div>
                   </validate>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-lg"
-                    @click="cambiarValor"
-                  >
-                    Entrar
-                  </button>
+                                          <input
+                          type="submit"
+                          value="Entrar"
+                          class="btn btn-primary btn-lg"
+                          @click="cambiarValor"
+                        />
                 </vue-form>
               </div>
             </div>
