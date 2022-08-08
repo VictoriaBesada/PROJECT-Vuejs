@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <LoginPage
-      v-if="!canAccess"
-      @changeFlag="recibiElMensaje"
-      :usuarios="listadoDeUsuarios"
-    />
-    <RegistroPage
-      v-if="!canAccess"
-      @enviarUsuarios="recibirUsuarios"
-      @agregarAlCarrito="recibirProductosCarrito"
-    />
+    <router-link to="/login">Login</router-link>
+    <router-link to="/registro">Registro</router-link>
     <ListadoPage
       msg="Fetch"
       v-if="canAccess"
@@ -22,27 +14,26 @@
       @actualizarCarrito="recibirCarritoActualizado"
     />
     <InfoPage v-if="productoSeleccionado" :producto="productoSeleccionado" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import LoginPage from "./components/LoginPage";
-import ListadoPage from "./components/ListadoPage";
-import CarritoPage from "./components/CarritoPage";
-import InfoPage from "./components/InfoPage";
-import RegistroPage from "./components/RegistroPage";
+import ListadoPage from "./pages/ListadoPage";
+import CarritoPage from "./pages/CarritoPage";
+import InfoPage from "./pages/InfoPage";
+
 
 export default {
   name: "App",
   components: {
-    LoginPage,
     ListadoPage,
     CarritoPage,
     InfoPage,
-    RegistroPage,
   },
   data() {
     return {
+      usuarios: [],
       canAccess: true,
       listadoDeUsuarios: [],
       carrito: [],

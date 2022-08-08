@@ -72,12 +72,12 @@
                       </div>
                     </div>
                   </validate>
-                                          <input
-                          type="submit"
-                          value="Entrar"
-                          class="btn btn-primary btn-lg"
-                          @click="cambiarValor"
-                        />
+                  <input
+                    type="submit"
+                    value="Entrar"
+                    class="btn btn-primary btn-lg"
+                    @click="validarLogin"
+                  />
                 </vue-form>
               </div>
             </div>
@@ -89,6 +89,7 @@
 </template>
 
 <script>
+import axios from "axios;";
 export default {
   name: "LoginPage",
   props: {
@@ -102,27 +103,30 @@ export default {
       },
       nombre: "",
       password: "",
+      usuarios: [],
     };
   },
   methods: {
-    // cambiarValor() {
-    //   let usuarioExistente = this.usuarios.filter(o=> o.usuario) == this.nombre && o.password == this.password
-    //   if (usuarioExistente) {
-    //     this.$emit("changeFlag");
-    //   }
-    // },
-    onSubmit: function () {
-      if (this.formstate.$invalid) {
-        alert("Hay errores en el ingreso");
-        return;
+    validarLogin() {
+      /*eslint-disable*/
+      debugger;
+      let data = this.usuarios.find(
+        (o) => o.nombre === o.nombre && o.password === o.contrasena
+      );
+      let isAdmin = this.usuarios.find((o) => o.rol === "admin");
+      if (data?.isAdmin) {
+        this.$router.push("./admin");
       }
-      console.log("Usuario logueado!", this.formstate);
-    },
-    cambiarValor() {
-      if (this.nombre == "admin" && this.password == "123") {
-        this.$emit("changeFlag");
+      if (data) {
+        this.$router.push("./productos");
       }
     },
+  },
+  async mounted() {
+    let respuesta = await axios.get(
+      "https://626765be78638336421ee4dd.mockapi.io/usuarios"
+    );
+    this.usuarios = respuesta.data;
   },
 };
 </script>

@@ -198,6 +198,7 @@
                           type="submit"
                           value="Registrarme"
                           class="btn btn-primary btn-lg"
+                          @click="createUser"
                         />
                       </div>
                     </vue-form>
@@ -302,6 +303,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "RegistroPage",
   props: [],
@@ -321,16 +324,29 @@ export default {
     };
   },
   methods: {
-    registrar() {
-      this.$emit("enviarUsuarios", this.usuario);
+    async createUser() {
+      const newUser = {
+        nombre: this.nombre,
+        apellido: this.pais,
+        correo: this.correo,
+        contrasena: this.password,
+        rol: "usuario",
+      };
+      let respuesta = await axios.post(
+        "https://626765be78638336421ee4dd.mockapi.io/usuarios"
+      );
+      this.usuarios = respuesta.data;
     },
-    onSubmit: function () {
-      if (this.formstate.$invalid) {
-        alert("Hay errores en el formulario");
-        return;
-      }
-      console.log("Form submitted!", this.formstate);
-    },
+    // registrar() {
+    //   this.$emit("enviarUsuarios", this.usuario);
+    // },
+    // onSubmit: function () {
+    //   if (this.formstate.$invalid) {
+    //     alert("Hay errores en el formulario");
+    //     return;
+    //   }
+    //   console.log("Form submitted!", this.formstate);
+    // },
     limpiar() {
       (this.usuario.name = ""),
         (this.usuario.pais = ""),
