@@ -16,8 +16,8 @@ export default new VueRouter({
       props: true,
     },
     {
-      path: "/productos",
-      name: "productos",
+      path: "/main",
+      name: "main",
       component: () => import("./pages/ListadoPage"),
     },
     {

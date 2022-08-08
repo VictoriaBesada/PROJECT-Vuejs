@@ -3,7 +3,7 @@
     <a @click="desloguear"><strong>Salir</strong></a>
     <section style="background-color: #eee">
       <div class="container">
-        <div class="container" style="display: flex">
+        <div class="container">
           <div class="form-group" style="margin: 10px">
             <label>Ver lista cursos</label>
             <br />
@@ -11,72 +11,8 @@
               Ver
             </button>
           </div>
-          <div class="form-group" style="margin: 10px">
-            <label>Agregar un nuevo curso</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Nombre del curso"
-              v-model="nuevo"
-            />
-            <button class="btn btn-primary btn-sm" @click="agregarDatos">
-              Agregar nuevo curso
-            </button>
-          </div>
-
-          <div class="form-group" style="margin: 10px">
-            <label>Cambiar titulo</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Insertar nuevo titulo"
-              v-model="nombre"
-            />
-            <button class="btn btn-primary btn-sm" @click="actualizarNombre">
-              Actualizar titulo
-            </button>
-          </div>
-          <div class="form-group" style="margin: 10px">
-            <label>Cambiar descripcion</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Insertar nueva descripcion"
-              v-model="descripcion"
-            />
-            <button
-              class="btn btn-primary btn-sm"
-              @click="actualizarDescripcion"
-            >
-              Actualizar descripcion
-            </button>
-          </div>
-          <div class="form-group" style="margin: 10px">
-            <label>Cambiar precio</label>
-            <input
-              type="text"
-              class="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Insertar nuevo precio"
-              v-model="precio"
-            />
-            <button class="btn btn-primary btn-sm" @click="actualizarPrecio">
-              Actualizar precio
-            </button>
-          </div>
-
-          <div class="form-group" style="margin: 10px">
-            <label>Eliminar un curso</label>
-            <br />
-            <button class="btn btn-primary btn-sm" @click="borrarDatos">
-              Eliminar curso
-            </button>
-          </div>
         </div>
-        <hr>
+        <hr />
         <div class="row">
           <div>
             <div>
@@ -138,7 +74,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "ListadoPage",
   props: {
@@ -160,65 +96,13 @@ export default {
       alert(payload);
     },
     desloguear() {
-      this.$emit("changeFlagFromListado");
+      this.$router.push('/login')
     },
     async traerDatos() {
       try {
         let rawData = await axios.get(`${this.rutaBase}/cursos`);
         let data = await rawData.data;
         this.cursos = data.sort((a, b) => b.id - a.id);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async agregarDatos() {
-      try {
-        const nuevoCurso = {
-          nombre: this.nuevo,
-        };
-        await axios.post(`${this.rutaBase}/cursos`, nuevoCurso);
-        await this.traerDatos();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async actualizarPrecio() {
-      try {
-        const actualizarPrecio = {
-          precio: this.precio,
-        };
-        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, actualizarPrecio);
-        await this.traerDatos();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async actualizarNombre() {
-      try {
-        const cambiarNombre = {
-          nombre: this.nombre,
-        };
-        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, cambiarNombre);
-        await this.traerDatos();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async actualizarDescripcion() {
-      try {
-        const cambiarDescripcion = {
-          descripcion: this.descripcion,
-        };
-        await axios.put(`${this.rutaBase}/cursos/${this.selected}`, cambiarDescripcion);
-        await this.traerDatos();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async borrarDatos() {
-      try {
-        await axios.delete(`${this.rutaBase}/cursos/${this.selected}`);
-        await this.traerDatos();
       } catch (error) {
         console.error(error);
       }

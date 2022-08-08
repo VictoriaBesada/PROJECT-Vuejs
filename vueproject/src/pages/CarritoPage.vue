@@ -1,6 +1,7 @@
 <template>
   <div>
-    <section class="h-100 h-custom" style="background-color: #eee">
+    <a @click="desloguear"><strong>Salir</strong></a>
+    <section class="vh-100" style="background-color: #eee">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col">
@@ -121,9 +122,7 @@
                               minlength="19"
                               maxlength="19"
                             />
-                            <label class="form-label" 
-                              >Numero de tarjeta</label
-                            >
+                            <label class="form-label">Numero de tarjeta</label>
                           </div>
 
                           <div class="row mb-4">
@@ -217,6 +216,9 @@ export default {
     this.carroLocal = this.carro;
   },
   methods: {
+    desloguear() {
+      this.$router.push("/login");
+    },
     remover(id) {
       this.$emit("remover", id);
     },

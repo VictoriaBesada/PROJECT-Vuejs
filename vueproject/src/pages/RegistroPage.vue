@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="vh-50" style="background-color: #eee">
+    <section class="vh-100" style="background-color: #eee">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-11">
@@ -220,85 +220,6 @@
       </div>
     </section>
     <div style="background-color: #eee"><br /><br /></div>
-
-    <section class="vh-50" style="background-color: #eee">
-      <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-lg-12 col-xl-11">
-            <div class="card text-black" style="border-radius: 25px">
-              <div class="card-body p-md-5">
-                <div class="row justify-content-center">
-                  <table class="table align-middle mb-0 bg-white">
-                    <thead class="bg-light">
-                      <tr>
-                        <th>Nombre</th>
-                        <th>Pais</th>
-                        <th>Edad</th>
-                        <th>Email</th>
-                        <th>Contrasenia</th>
-                        <th>Eliminar datos</th>
-                        <th>Agregar datos</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <div class="ms-3">
-                              <p class="text-success fw-bold mb-1">
-                                {{ usuario.name }}
-                              </p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="text-success fw-bold mb-1">
-                            {{ usuario.pais }}
-                          </p>
-                        </td>
-                        <td>
-                          <p class="text-success fw-bold mb-1">
-                            {{ usuario.edad }}
-                          </p>
-                        </td>
-                        <td>
-                          <p class="text-success fw-bold mb-1">
-                            {{ usuario.email }}
-                          </p>
-                        </td>
-                        <td>
-                          <p class="text-success fw-bold mb-1">
-                            {{ usuario.password }}
-                          </p>
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            class="btn btn-link btn-sm btn-rounded"
-                            v-on:click="limpiar"
-                          >
-                            Limpiar
-                          </button>
-                        </td>
-                        <td>
-                          <button
-                            type="button"
-                            class="btn btn-link btn-sm btn-rounded"
-                            v-on:click="agregar"
-                          >
-                            Agregar
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -311,7 +232,6 @@ export default {
   data() {
     return {
       formstate: {
-        // $error: {},
         $submittedState: {},
       },
       usuario: {
@@ -333,28 +253,12 @@ export default {
         rol: "usuario",
       };
       let respuesta = await axios.post(
-        "https://626765be78638336421ee4dd.mockapi.io/usuarios"
+        "https://626765be78638336421ee4dd.mockapi.io/usuarios",
+        newUser
       );
       this.usuarios = respuesta.data;
+      this.$router.push("/login");
     },
-    // registrar() {
-    //   this.$emit("enviarUsuarios", this.usuario);
-    // },
-    // onSubmit: function () {
-    //   if (this.formstate.$invalid) {
-    //     alert("Hay errores en el formulario");
-    //     return;
-    //   }
-    //   console.log("Form submitted!", this.formstate);
-    // },
-    limpiar() {
-      (this.usuario.name = ""),
-        (this.usuario.pais = ""),
-        (this.usuario.edad = ""),
-        (this.usuario.email = ""),
-        (this.usuario.password = "");
-    },
-    agregar() {},
   },
 };
 </script>

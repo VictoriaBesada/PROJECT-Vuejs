@@ -1,30 +1,33 @@
 <template>
-  <div class="card">
-    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-      <img
-        src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
-        class="img-fluid"
-      />
-      <a href="#!">
-        <div
-          class="mask"
-          style="background-color: rgba(251, 251, 251, 0.15)"
-        ></div>
-      </a>
-    </div>
+  <div>
+    <a @click="desloguear"><strong>Salir</strong></a>
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img
+          src="https://mdbootstrap.com/img/new/standard/nature/111.webp"
+          class="img-fluid"
+        />
+        <a href="#!">
+          <div
+            class="mask"
+            style="background-color: rgba(251, 251, 251, 0.15)"
+          ></div>
+        </a>
+      </div>
 
-    <div class="card-body">
-      <h5 class="card-title">{{ producto.titulo }}</h5>
-      <p class="card-text">
-        {{ producto.descripcion }}
-      </p>
-      <button
-        class="btn btn-outline-primary btn-sm mt-2"
-        type="button"
-        @click="agregarAlCarrito(item)"
-      >
-        Agregar al carrito
-      </button>
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.titulo }}</h5>
+        <p class="card-text">
+          {{ producto.descripcion }}
+        </p>
+        <button
+          class="btn btn-outline-primary btn-sm mt-2"
+          type="button"
+          @click="agregarAlCarrito(item)"
+        >
+          Agregar al carrito
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +38,11 @@ export default {
   props: ["producto"],
   data() {
     return {};
+  },
+  methods: {
+    desloguear() {
+      this.$router.push("/login");
+    },
   },
 };
 </script>

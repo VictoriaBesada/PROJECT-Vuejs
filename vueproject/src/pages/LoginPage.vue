@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="h-100 h-custom" style="background-color: #eee">
+    <section class="vh-100" style="background-color: #eee">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col">
@@ -89,12 +89,9 @@
 </template>
 
 <script>
-import axios from "axios;";
+import axios from "axios";
 export default {
   name: "LoginPage",
-  props: {
-    usuarios: Array,
-  },
   data() {
     return {
       formstate: {
@@ -114,11 +111,15 @@ export default {
         (o) => o.nombre === o.nombre && o.password === o.contrasena
       );
       let isAdmin = this.usuarios.find((o) => o.rol === "admin");
-      if (data?.isAdmin) {
-        this.$router.push("./admin");
-      }
+      localStorage.clear();
       if (data) {
-        this.$router.push("./productos");
+        localStorage.setItem("isLogged", true);
+        if (data?.isAdmin) {
+          localStorage.setItem("isAdmin", true);
+          this.$router.push("./admin");
+        }
+        localStorage.setItem("isAdmin", false);
+        this.$router.push("./main");
       }
     },
   },

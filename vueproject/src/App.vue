@@ -2,33 +2,20 @@
   <div id="app">
     <router-link to="/login">Login</router-link>
     <router-link to="/registro">Registro</router-link>
-    <ListadoPage
-      msg="Fetch"
-      v-if="canAccess"
-      @changeFlagFromListado="recibiElMensaje"
-      @verDetalleProducto="recibirDetalleProducto"
-    />
-    <CarritoPage
-      v-if="canAccess"
-      :carro="carrito"
-      @actualizarCarrito="recibirCarritoActualizado"
-    />
+    <router-link to="/main">Main</router-link>
+    <router-link to="/carrito">Carrito</router-link>
+    <router-link to="/admin">Admin</router-link>
     <InfoPage v-if="productoSeleccionado" :producto="productoSeleccionado" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ListadoPage from "./pages/ListadoPage";
-import CarritoPage from "./pages/CarritoPage";
 import InfoPage from "./pages/InfoPage";
-
 
 export default {
   name: "App",
   components: {
-    ListadoPage,
-    CarritoPage,
     InfoPage,
   },
   data() {
