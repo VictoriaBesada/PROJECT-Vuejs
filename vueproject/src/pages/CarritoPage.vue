@@ -213,10 +213,16 @@ export default {
     };
   },
   mounted() {
+    let isLogged = localStorage.getItem("isLogged");
+
+    if (!isLogged) {
+      this.$router.push("/login");
+    }
     this.carroLocal = this.carro;
   },
   methods: {
     desloguear() {
+      localStorage.clear();
       this.$router.push("/login");
     },
     remover(id) {

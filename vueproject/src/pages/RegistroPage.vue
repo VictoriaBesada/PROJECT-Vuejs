@@ -14,7 +14,6 @@
 
                     <vue-form
                       :state="formstate"
-                      @submit.prevent="onSubmit"
                       autocomplete="off"
                       class="mx-1 mx-md-4"
                     >
@@ -195,7 +194,6 @@
                         class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                       >
                         <input
-                          type="submit"
                           value="Registrarme"
                           class="btn btn-primary btn-lg"
                           @click="createUser"
@@ -248,7 +246,7 @@ export default {
       const newUser = {
         nombre: this.nombre,
         apellido: this.pais,
-        correo: this.correo,
+        correo: this.email,
         contrasena: this.password,
         rol: "usuario",
       };

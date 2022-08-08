@@ -39,8 +39,16 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    let isLogged = localStorage.getItem("isLogged");
+
+    if (!isLogged) {
+      this.$router.push("/login");
+    }
+  },
   methods: {
     desloguear() {
+      localStorage.clear();
       this.$router.push("/login");
     },
   },

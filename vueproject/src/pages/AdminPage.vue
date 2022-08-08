@@ -142,13 +142,14 @@ import axios from "axios";
 export default {
   name: "AdminPage",
   mounted() {
+    let isLogged = localStorage.getItem("isLogged");
     let isAdmin = localStorage.getItem("isAdmin");
-    let isLogged = localStorage.getItem("isAdmin");
-    if (!isLogged) {
-      this.$$router.push("/login");
+
+    if (isLogged != 'true') {
+      this.$router.push("/login");
     }
-    if (!isAdmin) {
-      this.$$router.push("/main");
+    if (isAdmin != 'true') {
+      this.$router.push("/main");
     }
   },
   props: {
@@ -170,6 +171,7 @@ export default {
       alert(payload);
     },
     desloguear() {
+      localStorage.clear()
       this.$router.push("/login");
     },
     async traerDatos() {

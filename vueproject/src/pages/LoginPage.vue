@@ -72,12 +72,9 @@
                       </div>
                     </div>
                   </validate>
-                  <input
-                    type="submit"
-                    value="Entrar"
-                    class="btn btn-primary btn-lg"
-                    @click="validarLogin"
-                  />
+                  <button class="btn btn-primary btn-lg" @click="validarLogin">
+                    Entrar
+                  </button>
                 </vue-form>
               </div>
             </div>
@@ -106,20 +103,20 @@ export default {
   methods: {
     validarLogin() {
       /*eslint-disable*/
-      debugger;
       let data = this.usuarios.find(
-        (o) => o.nombre === o.nombre && o.password === o.contrasena
+        (o) => o.nombre === o.nombre && o.contrasena === o.password
       );
       let isAdmin = this.usuarios.find((o) => o.rol === "admin");
       localStorage.clear();
       if (data) {
-        localStorage.setItem("isLogged", true);
+        localStorage.setItem("isLogged", "true");
         if (data?.isAdmin) {
-          localStorage.setItem("isAdmin", true);
+          localStorage.setItem("isAdmin", "true");
           this.$router.push("./admin");
+        } else {
+          localStorage.setItem("isAdmin", "false");
+          this.$router.push("./main");
         }
-        localStorage.setItem("isAdmin", false);
-        this.$router.push("./main");
       }
     },
   },

@@ -91,12 +91,20 @@ export default {
       selected: 0,
     };
   },
+  mounted() {
+    let isLogged = localStorage.getItem("isLogged");
+
+    if (isLogged != 'true') {
+      this.$router.push("/login");
+    }
+  },
   methods: {
     alert(payload) {
       alert(payload);
     },
     desloguear() {
-      this.$router.push('/login')
+      localStorage.clear();
+      this.$router.push("/login");
     },
     async traerDatos() {
       try {
