@@ -4,13 +4,6 @@
     <section style="background-color: #eee">
       <div class="container">
         <div class="container">
-          <div class="form-group" style="margin: 10px">
-            <label>Ver lista cursos</label>
-            <br />
-            <button class="btn btn-primary btn-sm" @click="traerDatos">
-              Ver
-            </button>
-          </div>
         </div>
         <hr />
         <div class="row">
@@ -19,30 +12,27 @@
               <div
                 class="card col-xl-3 col-lg-4"
                 style="display: inline-block"
-                v-for="curso in cursos"
-                :key="curso.id"
+                v-for="(item, index) in productos"
+                :key="index"
               >
-                <img :src="curso.imagen" class="card-img-top" alt="producto" />
+                <img
+                  :src="item.imagen"
+                  class="card-img-top"
+                  alt="producto"
+                />
                 <div
                   class="card-body"
-                  @click="
-                    () => {
-                      selected = curso.id;
-                      alert(selected);
-                      return actualizarDatos();
-                    }
-                  "
                 >
                   <div class="text-center">
-                    <h5 class="card-title">{{ curso.nombre }}</h5>
-                    <p class="text-muted mb-4">{{ curso.descripcion }}</p>
+                    <h5 class="card-title">{{ item.nombre }}</h5>
+                    <p class="text-muted mb-4">{{ item.descripcion }}</p>
                   </div>
                   <div>
                     <div
                       class="d-flex justify-content-between total font-weight-bold mt-4"
                     >
                       <span>Precio unitario</span
-                      ><span>{{ curso.precio }}</span>
+                      ><span>{{ item.precio }}</span>
                     </div>
                   </div>
                   <div style="text-align: center">
@@ -50,7 +40,7 @@
                       style="margin: 10px"
                       class="btn btn-primary btn-sm"
                       type="button"
-                      @click="verDetalle(curso.descripcion)"
+                      @click="verDetalle(item.descripcion)"
                     >
                       Detalles
                     </button>
@@ -58,7 +48,7 @@
                       style="margin: 10px"
                       class="btn btn-outline-primary btn-sm mt-2"
                       type="button"
-                      @click="agregarAlCarrito(curso.id)"
+                      @click="agregarAlCarrito(item.id)"
                     >
                       Agregar al carrito
                     </button>
@@ -77,50 +67,28 @@
 import axios from "axios";
 export default {
   name: "ListadoPage",
-  props: {
-    msg: String,
+     async mounted() {
+      /*eslint-disable*/
+      debugger
+    let isLogged = localStorage.getItem('isLogged');
+
+    if (isLogged != 'true') {
+      this.$router.push('/login');
+    }
+    let respuesta = await axios.get(
+      "https://62f2b930a84d8c9681190576.mockapi.io/productos"
+    );
+    this.productos = respuesta.data;
   },
   data() {
     return {
-      rutaBase: "https://626765be78638336421ee4dd.mockapi.io",
-      cursos: [],
-      nuevo: "",
-      precio: "",
-      nombre: "",
-      descripcion: "",
-      selected: 0,
+      productos: [],
     };
   },
-  mounted() {
-    let isLogged = localStorage.getItem("isLogged");
-
-    if (isLogged != 'true') {
-      this.$router.push("/login");
-    }
-  },
   methods: {
-    alert(payload) {
-      alert(payload);
-    },
     desloguear() {
       localStorage.clear();
       this.$router.push("/login");
-    },
-    async traerDatos() {
-      try {
-        let rawData = await axios.get(`${this.rutaBase}/cursos`);
-        let data = await rawData.data;
-        this.cursos = data.sort((a, b) => b.id - a.id);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    agregarAlCarrito(payload) {
-      let objetoCarrito = { ...payload, cantidadCarrito: 1 };
-      this.$emit("changeFlagFromListado", objetoCarrito);
-    },
-    verDetalleProducto(payload) {
-      this.$emit("verDetalleProducto", payload);
     },
   },
 };

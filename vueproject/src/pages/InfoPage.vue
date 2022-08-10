@@ -40,16 +40,16 @@ export default {
     return {};
   },
   mounted() {
-    let isLogged = localStorage.getItem("isLogged");
+    let isLogged = localStorage.getItem('isLogged');
 
-    if (!isLogged) {
-      this.$router.push("/login");
+    if (isLogged != 'true') {
+      this.$router.push('/login');
     }
   },
   methods: {
     desloguear() {
       localStorage.clear();
-      this.$router.push("/login");
+      this.$router.push('/login');
     },
   },
 };

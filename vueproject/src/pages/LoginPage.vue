@@ -8,7 +8,6 @@
               <div class="card-body p-4">
                 <vue-form
                   :state="formstate"
-                  @submit.prevent="onSubmit"
                   autocomplete="off"
                   class="mx-1 mx-md-4"
                 >
@@ -92,11 +91,10 @@ export default {
   data() {
     return {
       formstate: {
-        // $error: {},
         $submittedState: {},
       },
-      nombre: "",
-      password: "",
+      nombre: '',
+      password: '',
       usuarios: [],
     };
   },
@@ -104,25 +102,24 @@ export default {
     validarLogin() {
       /*eslint-disable*/
       let data = this.usuarios.find(
-        (o) => o.nombre === o.nombre && o.contrasena === o.password
+        (o) => o.nombre === o.nombre && o.password === o.password
       );
-      let isAdmin = this.usuarios.find((o) => o.rol === "admin");
       localStorage.clear();
       if (data) {
-        localStorage.setItem("isLogged", "true");
+        localStorage.setItem('isLogged', 'true');
         if (data?.isAdmin) {
-          localStorage.setItem("isAdmin", "true");
-          this.$router.push("./admin");
+          localStorage.setItem('isAdmin', 'true');
+          this.$router.push('/admin');
         } else {
-          localStorage.setItem("isAdmin", "false");
-          this.$router.push("./main");
+          localStorage.setItem('isAdmin', 'false');
+          this.$router.push('/main');
         }
       }
     },
   },
   async mounted() {
     let respuesta = await axios.get(
-      "https://626765be78638336421ee4dd.mockapi.io/usuarios"
+      "https://62f2b930a84d8c9681190576.mockapi.io/usuarios"
     );
     this.usuarios = respuesta.data;
   },

@@ -20,7 +20,7 @@ Vue.mixin({
   methods: {},
   data() {
     return {
-      usuario: "",
+      nombre: "",
       password: "",
     };
   },

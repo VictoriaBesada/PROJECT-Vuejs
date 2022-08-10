@@ -244,18 +244,19 @@ export default {
   methods: {
     async createUser() {
       const newUser = {
-        nombre: this.nombre,
-        apellido: this.pais,
-        correo: this.email,
-        contrasena: this.password,
-        rol: "usuario",
+        name: this.name,
+        pais: this.pais,
+        email: this.email,
+        edad: this.edad,
+        password: this.password,
+        isAdmin: 'false',
       };
       let respuesta = await axios.post(
-        "https://626765be78638336421ee4dd.mockapi.io/usuarios",
+        "https://62f2b930a84d8c9681190576.mockapi.io/usuarios",
         newUser
       );
       this.usuarios = respuesta.data;
-      this.$router.push("/login");
+      this.$router.push("/login")
     },
   },
 };
