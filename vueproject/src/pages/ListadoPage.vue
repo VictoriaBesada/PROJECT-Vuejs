@@ -1,14 +1,18 @@
 <template>
   <div>
-    <a @click="desloguear"><strong>Salir</strong></a>
-    <h2>Carrito:</h2>
-    <ul>
-    <li v-for="(item, index) in $store.state.carrito" :key="index"> {{item.name}}</li>
-    </ul>
+    <div>
+    <a @click="desloguear"><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" /></a>
+    <div class="carrito">
+      <h2 class="cartIcon"><font-awesome-icon icon="fa-solid fa-cart-shopping" /></h2>
+      <ul>
+        <li v-for="(item, index) in $store.state.carrito" :key="index">
+          {{ item.name }}
+        </li>
+      </ul>
+    </div>
     <section style="background-color: #eee">
       <div class="container">
-        <div class="container">
-        </div>
+        <div class="container"></div>
         <hr />
         <div class="row">
           <div>
@@ -19,14 +23,8 @@
                 v-for="(item, index) in productos"
                 :key="index"
               >
-                <img
-                  :src="item.imagen"
-                  class="card-img-top"
-                  alt="producto"
-                />
-                <div
-                  class="card-body"
-                >
+                <img :src="item.imagen" class="card-img-top" alt="producto" />
+                <div class="card-body">
                   <div class="text-center">
                     <h5 class="card-title">{{ item.nombre }}</h5>
                     <p class="text-muted mb-4">{{ item.descripcion }}</p>
@@ -35,8 +33,7 @@
                     <div
                       class="d-flex justify-content-between total font-weight-bold mt-4"
                     >
-                      <span>Precio unitario</span
-                      ><span>{{ item.precio }}</span>
+                      <span>Precio unitario</span><span>{{ item.precio }}</span>
                     </div>
                   </div>
                   <div style="text-align: center">
@@ -71,13 +68,13 @@
 import axios from "axios";
 export default {
   name: "ListadoPage",
-     async mounted() {
-      /*eslint-disable*/
-      debugger
-    let isLogged = localStorage.getItem('isLogged');
+  async mounted() {
+    /*eslint-disable*/
+    debugger;
+    let isLogged = localStorage.getItem("isLogged");
 
-    if (isLogged != 'true') {
-      this.$router.push('/login');
+    if (isLogged != "true") {
+      this.$router.push("/login");
     }
     let respuesta = await axios.get(
       "https://62f2b930a84d8c9681190576.mockapi.io/productos"
@@ -94,10 +91,10 @@ export default {
       localStorage.clear();
       this.$router.push("/login");
     },
-    agregarProductoAlCarrito(payload){
-      let o = {...payload, cantidadCarrito : 1}
-      this.$store.commit('agregarAlCarrito', o)
-    }
+    agregarProductoAlCarrito(payload) {
+      let o = { ...payload, cantidadCarrito: 1 };
+      this.$store.commit("agregarAlCarrito", o);
+    },
   },
 };
 </script>
@@ -106,5 +103,13 @@ export default {
 .card {
   border-radius: 25px;
   margin: 5px;
+}
+.carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cartIcon{
+  margin-right: 1rem;
 }
 </style>
