@@ -21,10 +21,10 @@
                           required
                           name="nombre"
                           minlength="5"
-                          maxlength="12"
+                          maxlength="30"
                           class="form-control"
                           type="text"
-                          v-model.lazy="nombre"
+                          v-model="nombre"
                         />
                         <field-messages
                           name="nombre"
@@ -35,7 +35,7 @@
                             Usuario es un campo requerido
                           </div>
                           <div slot="minlength">
-                            Usuario debe tener entre 5 y 12 caracteres
+                            Usuario debe tener entre 5 y 30 caracteres
                           </div>
                         </field-messages>
                       </div>
@@ -50,11 +50,11 @@
                         <input
                           required
                           minlength="5"
-                          maxlength="12"
+                          maxlength="30"
                           name="password"
                           type="password"
                           class="form-control required-field"
-                          v-model.lazy="password"
+                          v-model="password"
                         />
                         <field-messages
                           name="password"
@@ -65,7 +65,7 @@
                             Password es un campo requerido
                           </div>
                           <div slot="minlength">
-                            Password debe tener entre 5 y 12 caracteres
+                            Password debe tener entre 5 y 30 caracteres
                           </div>
                         </field-messages>
                       </div>
@@ -100,19 +100,19 @@ export default {
   },
   methods: {
     validarLogin() {
-      /*eslint-disable*/
       let data = this.usuarios.find(
         (o) => o.nombre === o.nombre && o.password === o.password
       );
       localStorage.clear();
       if (data) {
         localStorage.setItem('isLogged', 'true');
+
         if (data?.isAdmin) {
           localStorage.setItem('isAdmin', 'true');
-          this.$router.push('/admin');
+          this.$router.push('admin');
         } else {
           localStorage.setItem('isAdmin', 'false');
-          this.$router.push('/main');
+          this.$router.push('main');
         }
       }
     },

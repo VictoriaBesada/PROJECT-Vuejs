@@ -14,9 +14,7 @@
                   :key="index"
                 >
                   <img :src="item.imagen" class="card-img-top" alt="producto" />
-                  <div
-                    class="card-body"
-                  >
+                  <div class="card-body">
                     <div class="text-center">
                       <h5 class="card-title">{{ item.nombre }}</h5>
                       <p class="text-muted mb-4">{{ item.descripcion }}</p>
@@ -75,11 +73,11 @@ export default {
     },
     editarProducto(payload) {
       /*eslint-disable*/
-      debugger
-      this.$router.push({ name: 'editar', params: { id: payload} });
+      debugger;
+      this.$router.push({ name: "editar", params: { id: payload } });
     },
   },
-    async mounted() {
+  async mounted() {
     /*eslint-disable*/
     debugger;
     let isLogged = localStorage.getItem("isLogged");
@@ -90,7 +88,7 @@ export default {
     }
     if (isAdmin != "true") {
       this.$router.push("/admin");
-      // PONER EN 'main'
+      // poner en main
     }
     let respuesta = await axios.get(
       "https://62f2b930a84d8c9681190576.mockapi.io/productos"

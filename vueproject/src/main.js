@@ -5,6 +5,7 @@ import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import VueForm from "vue-form";
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false;
 /* eslint-disable */
@@ -27,6 +28,7 @@ Vue.mixin({
 });
 
 new Vue({
+  store,
   router,
   render: (h) => h(App),
 }).$mount("#app");

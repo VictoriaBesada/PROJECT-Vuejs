@@ -249,7 +249,7 @@ export default {
         email: this.email,
         edad: this.edad,
         password: this.password,
-        isAdmin: 'false',
+        isAdmin: false,
       };
       let respuesta = await axios.post(
         "https://62f2b930a84d8c9681190576.mockapi.io/usuarios",
