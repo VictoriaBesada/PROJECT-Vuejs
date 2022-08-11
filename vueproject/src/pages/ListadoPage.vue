@@ -1,14 +1,21 @@
 <template>
   <div>
-    <div>
-    <a @click="desloguear"><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" /></a>
+    <div class="iconos">
+    <div class="logoutIcon">
+      <h2 @click="desloguear"
+        ><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket"
+      /></h2>
+    </div>
     <div class="carrito">
-      <h2 class="cartIcon"><font-awesome-icon icon="fa-solid fa-cart-shopping" /></h2>
+      <h2 class="cartIcon">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+      </h2>
       <ul>
         <li v-for="(item, index) in $store.state.carrito" :key="index">
           {{ item.name }}
         </li>
       </ul>
+    </div>
     </div>
     <section style="background-color: #eee">
       <div class="container">
@@ -109,7 +116,18 @@ export default {
   flex-direction: column;
   align-items: flex-end;
 }
-.cartIcon{
+.cartIcon {
   margin-right: 1rem;
+}
+.logoutIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1rem;
+}
+.iconos{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>

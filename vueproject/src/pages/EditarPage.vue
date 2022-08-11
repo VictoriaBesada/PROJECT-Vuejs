@@ -1,6 +1,22 @@
 <template>
   <div>
-    <a @click="desloguear"><strong>Salir</strong></a>
+    <div class="iconos">
+      <div class="logoutIcon">
+        <h2 @click="desloguear">
+          <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+        </h2>
+      </div>
+      <div class="carrito">
+        <h2 class="cartIcon">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        </h2>
+        <ul>
+          <li v-for="(item, index) in $store.state.carrito" :key="index">
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
     <section style="background-color: #eee">
       <div class="container">
         <div class="container" style="display: flex align-items">
@@ -31,9 +47,9 @@ export default {
   data() {
     return {
       producto: {
-        nombre: '',
+        nombre: "",
         precio: 0,
-        descripcion: '',
+        descripcion: "",
         amount: 0,
       },
     };
@@ -41,7 +57,7 @@ export default {
   async mounted() {
     /*eslint-disable*/
     debugger;
-    let paramId = this.$route.params.id
+    let paramId = this.$route.params.id;
     let respuesta = await axios.get(
       "https://62f2b930a84d8c9681190576.mockapi.io/productos/" + paramId
     );
@@ -53,9 +69,10 @@ export default {
       this.$router.push("/login");
     },
     async actualizarProducto() {
-      debugger
+      debugger;
       let respuesta = await axios.put(
-        "https://62f2b930a84d8c9681190576.mockapi.io/productos/" + this.$route.params.id,
+        "https://62f2b930a84d8c9681190576.mockapi.io/productos/" +
+          this.$route.params.id,
         this.producto
       );
       alert("producto actualizado con exito");
@@ -63,3 +80,25 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cartIcon {
+  margin-right: 1rem;
+}
+.logoutIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1rem;
+}
+.iconos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+</style>

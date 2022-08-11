@@ -1,6 +1,22 @@
 <template>
   <div>
-    <a @click="desloguear"><strong>Salir</strong></a>
+    <div class="iconos">
+      <div class="logoutIcon">
+        <h2 @click="desloguear">
+          <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+        </h2>
+      </div>
+      <div class="carrito">
+        <h2 class="cartIcon">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        </h2>
+        <ul>
+          <li v-for="(item, index) in $store.state.carrito" :key="index">
+            {{ item.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
     <section class="vh-100" style="background-color: #eee">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -213,10 +229,10 @@ export default {
     };
   },
   mounted() {
-    let isLogged = localStorage.getItem('isLogged');
+    let isLogged = localStorage.getItem("isLogged");
 
-    if (isLogged != 'true') {
-      this.$router.push('/login');
+    if (isLogged != "true") {
+      this.$router.push("/login");
     }
     this.carroLocal = this.carro;
   },
@@ -246,5 +262,24 @@ export default {
 <style scoped>
 .card {
   border-radius: 25px;
+}
+.carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cartIcon {
+  margin-right: 1rem;
+}
+.logoutIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1rem;
+}
+.iconos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
