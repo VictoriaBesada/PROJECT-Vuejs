@@ -80,16 +80,16 @@ export default {
   async mounted() {
     /*eslint-disable*/
     debugger;
-    let isLogged = localStorage.getItem("isLogged");
-    let isAdmin = localStorage.getItem("isAdmin");
+    // let isLogged = localStorage.getItem("isLogged");
+    // let isAdmin = localStorage.getItem("isAdmin");
 
-    if (isLogged != "true") {
-      this.$router.push("/login");
-    }
-    if (isAdmin != "true") {
-      this.$router.push("/admin");
-      // poner en main
-    }
+    // if (isLogged != "true") {
+    //   this.$router.push("/login");
+    // }
+    // if (isAdmin != "true") {
+    //   this.$router.push("/main");
+    //   // poner en main
+    // }
     let respuesta = await axios.get(
       "https://62f2b930a84d8c9681190576.mockapi.io/productos"
     );

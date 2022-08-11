@@ -88,6 +88,12 @@
 import axios from "axios";
 export default {
   name: "LoginPage",
+  async mounted() {
+    let respuesta = await axios.get(
+      "https://62f2b930a84d8c9681190576.mockapi.io/usuarios"
+    );
+    this.usuarios = respuesta.data;
+  },  
   data() {
     return {
       formstate: {
@@ -117,12 +123,7 @@ export default {
       }
     },
   },
-  async mounted() {
-    let respuesta = await axios.get(
-      "https://62f2b930a84d8c9681190576.mockapi.io/usuarios"
-    );
-    this.usuarios = respuesta.data;
-  },
+
 };
 </script>
 

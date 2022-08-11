@@ -48,7 +48,7 @@
                       style="margin: 10px"
                       class="btn btn-outline-primary btn-sm mt-2"
                       type="button"
-                      @click="agregarAlCarrito(item.id)"
+                      @click="agregarAlCarrito"
                     >
                       Agregar al carrito
                     </button>
@@ -90,6 +90,9 @@ export default {
       localStorage.clear();
       this.$router.push("/login");
     },
+    agregarAlCarrito(){
+      this.$store.dispatch('agregarAlCarrito')
+    }
   },
 };
 </script>

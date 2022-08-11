@@ -42,12 +42,16 @@ export default new Vuex.Store({
       }, 5000);
     },
     getAllProducts: async ({ commit }) => {
-      let data = await fetch(``);
+      let data = await fetch(
+        `https://62f2b930a84d8c9681190576.mockapi.io/productos`
+      );
       let datados = await data.jason();
       commit("obtener productos", productos);
     },
     getAllUsers: async ({ commit }) => {
-      let data = await fetch(``);
+      let data = await fetch(
+        `https://62f2b930a84d8c9681190576.mockapi.io/usuarios`
+      );
       let datados = await data.jason();
       commit("obtener usuarios", usuarios);
     },
