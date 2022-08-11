@@ -1,6 +1,10 @@
 <template>
   <div>
     <a @click="desloguear"><strong>Salir</strong></a>
+    <h2>Carrito:</h2>
+    <ul>
+    <li v-for="(item, index) in $store.state.carrito" :key="index"> {{item.name}}</li>
+    </ul>
     <section style="background-color: #eee">
       <div class="container">
         <div class="container">
@@ -48,7 +52,7 @@
                       style="margin: 10px"
                       class="btn btn-outline-primary btn-sm mt-2"
                       type="button"
-                      @click="agregarAlCarrito"
+                      @click="agregarProductoAlCarrito(item)"
                     >
                       Agregar al carrito
                     </button>
@@ -90,8 +94,9 @@ export default {
       localStorage.clear();
       this.$router.push("/login");
     },
-    agregarAlCarrito(){
-      this.$store.dispatch('agregarAlCarrito')
+    agregarProductoAlCarrito(payload){
+      let o = {...payload, cantidadCarrito : 1}
+      this.$store.commit('agregarAlCarrito', o)
     }
   },
 };
