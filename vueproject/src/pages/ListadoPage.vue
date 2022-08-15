@@ -1,21 +1,21 @@
 <template>
   <div>
     <div class="iconos">
-    <div class="logoutIcon">
-      <h2 @click="desloguear"
-        ><font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket"
-      /></h2>
-    </div>
-    <div class="carrito">
-      <h2 class="cartIcon">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-      </h2>
-      <ul>
-        <li v-for="(item, index) in $store.state.carrito" :key="index">
-          {{ item.name }}
-        </li>
-      </ul>
-    </div>
+      <div class="logoutIcon">
+        <h2 @click="desloguear">
+          <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
+        </h2>
+      </div>
+      <div class="carrito">
+        <h2 class="cartIcon">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        </h2>
+        <ul>
+          <li v-for="(item, index) in $store.state.carrito" :key="index">
+            {{ item.name }} - {{ item.cantidadCarrito }}
+          </li>
+        </ul>
+      </div>
     </div>
     <section style="background-color: #eee">
       <div class="container">
@@ -27,7 +27,7 @@
               <div
                 class="card col-xl-3 col-lg-4"
                 style="display: inline-block"
-                v-for="(item, index) in productos"
+                v-for="(item, index) in $store.state.productos"
                 :key="index"
               >
                 <img :src="item.imagen" class="card-img-top" alt="producto" />
@@ -72,27 +72,13 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  name: "ListadoPage",
-  async mounted() {
-    /*eslint-disable*/
-    debugger;
-    let isLogged = localStorage.getItem("isLogged");
-
-    if (isLogged != "true") {
-      this.$router.push("/login");
-    }
-    let respuesta = await axios.get(
-      "https://62f2b930a84d8c9681190576.mockapi.io/productos"
-    );
-    this.productos = respuesta.data;
-  },
-  data() {
-    return {
-      productos: [],
-    };
-  },
+  name: "ListadoPage",  
+  // data() {
+  //   return {
+  //     productId: 0,
+  //   };
+  // },
   methods: {
     desloguear() {
       localStorage.clear();
@@ -103,6 +89,18 @@ export default {
       this.$store.commit("agregarAlCarrito", o);
     },
   },
+  // async mounted() {
+  //   /*eslint-disable*/
+  //   debugger;
+  //   let isLogged = localStorage.getItem("isLogged");
+
+  //   if (isLogged != "true") {
+  //     this.$router.push("/login");
+  //   }
+    // let respuesta = await axios.get(
+    //   "https://62f2b930a84d8c9681190576.mockapi.io/productos"
+    // );
+    // this.productos = respuesta.data;
 };
 </script>
 
@@ -125,7 +123,7 @@ export default {
   align-items: flex-start;
   margin-left: 1rem;
 }
-.iconos{
+.iconos {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -4,25 +4,21 @@ import Vue from "vue"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  /* eslint-disable */
   state: {
     carrito: [],
     productos: [],
-    msg: "Mensaje x defecto desde store",
     usuario: {
       nombre: "",
     },
-    usuarios: []
+    usuarios: [],
   },
   mutations: {
-    cambiarElMensaje: (state, payload) => {
-      if (payload) state.msg = payload;
-    },
     agregarAlCarrito: (state, payload) => {
       let o = state.carrito.find((x) => x.id === payload.id);
       if (o) {
         payload = { ...payload, cantidadCarrito: o.id + 1 };
       }
-      debugger;
       state.carrito.unshift(payload);
     },
     editarUsuario(state, payload) {
@@ -36,19 +32,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setMensaje: ({ commit }, payload) => {
-      setTimeout(() => {
-        commit("cambiarMensaje", payload);
-      }, 5000);
-    },
-    getAllProducts: async ({ commit }) => {
+    obtenerTodosLosProductos: async ({ commit }) => {
       let data = await fetch(
         `https://62f2b930a84d8c9681190576.mockapi.io/productos`
       );
       let datados = await data.jason();
       commit("obtener productos", productos);
     },
-    getAllUsers: async ({ commit }) => {
+    obtenerTodosLosUsuarios: async ({ commit }) => {
       let data = await fetch(
         `https://62f2b930a84d8c9681190576.mockapi.io/usuarios`
       );
