@@ -49,7 +49,7 @@
                       <div class="col-sm-10">
                         <input
                           required
-                          minlength="5"
+                          minlength="3"
                           maxlength="30"
                           name="password"
                           type="password"
@@ -65,7 +65,7 @@
                             Password es un campo requerido
                           </div>
                           <div slot="minlength">
-                            Password debe tener entre 5 y 30 caracteres
+                            Password debe tener entre 3 y 30 caracteres
                           </div>
                         </field-messages>
                       </div>
